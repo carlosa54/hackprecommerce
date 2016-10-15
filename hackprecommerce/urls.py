@@ -23,5 +23,4 @@ urlpatterns = [
     url(r'^api/', include('api.urls')),
     url(r'^$', home, name='home'),
 
-
 ]
