@@ -1,0 +1,9 @@
+{% block content %}
+<div class="row">
+{% for object in object_list %}
+	<!-- Here goes the products -->
+	{{ object.title }}
+	<img src="{{ object.get_image_url }}">
+{% endfor %}
+</div>
+{% endblock %}
