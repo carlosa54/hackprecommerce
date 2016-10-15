@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div id="brand">
+ 	<center>
+ 		<h2>Artesanias PR</h2>
+ 		<hr>
+ 	</center>
+</div>
+<br>
+<div class="jumbotron">
+	<div class="container">
+		<div class="col-lg-3">
+			<img src="https://s-media-cache-ak0.pinimg.com/originals/51/c1/9b/51c19b88055b4d6cfd0f445553034ccd.jpg" class="img-responsive" alt="Product" >
+		</div>
+		<div class="col-lg-5">
+			<label>Nombre del Producto</label><br>
+			<label>Price</label><br>
+			<label>Description:</label><br>
+			<label>Esto es un objeto que representa nuestra historia.</label>
+		</div>
+		<div class="col-lg-4">
+			<a class="btn btn-primary btn-xm">Add to Cart</a>
+			<br><br>
+			<a class="btn btn-default btn-xm" href="/">Back</a>
+		</div>
+		
+	</div>
+</div>
+{% endblock %}

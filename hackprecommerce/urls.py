@@ -22,5 +22,4 @@ urlpatterns = [
     url(r'^products/', include('products.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^$', home, name='home'),
-
 ]
