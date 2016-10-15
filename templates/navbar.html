@@ -31,9 +31,6 @@
             <li>
               <a href="?store={{ object.slug }}"><i class="fa fa-shopping-cart fa-navbar-cart"> <span id='cart-count-badge' class='badge'>{{request.session.cart_item_count }}</span></i></a>
             </li>
-          {% if request.user.is_authenticated %}      
-            <li><a href="{% url 'auth_logout' %}?next={{request.path}}">Logout</a></li>
-            {% else %}
             <li><a href="">Register</a></li>
       
             <li class="dropdown">
@@ -60,7 +57,6 @@
                 <li><a href="#">One more separated link</a></li> -->
               </ul>
             </li>
-            {% endif %}
 
           </ul>
 
