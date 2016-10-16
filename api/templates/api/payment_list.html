@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
 {% block content %}
 <div class="row">
 <h2>Payment History</h2>
@@ -9,7 +12,6 @@
 			<th>Phone</th>
 			<th>Amount</th>
 			<th>Status</th>
-			<th>Cart</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,7 +21,6 @@
 			<td>{{object.phone}}</td>
 			<td>$ {{object.amount}}</td>
 			<td>{{object.status}}</td>
-			<td>{{object.cart}}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
