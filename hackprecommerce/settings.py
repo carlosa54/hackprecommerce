@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #my apps
     'api',
     'products',
+    'carts',
 ]
 
 MIDDLEWARE = [
