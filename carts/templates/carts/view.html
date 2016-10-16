@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 
 <script>
 {% block jquery %}
@@ -67,6 +67,8 @@ $(".item-qty").change(function(){
 	}
 </style>
 <div class='row main-content'>
+	<center><img src="{% static 'css/logo.png' %}" class="img-responsive" alt="Image"></center>
+	<br><br>
 	{% if object.cartitem_set.count < 1 %}
 	{% include "carts/empty_cart.html" %}
 	{% else %}
@@ -74,35 +76,38 @@ $(".item-qty").change(function(){
 			<h1>Your cart</h1>
 	</div>
 	<div class='container col-sm-12' style="background-color: white;">
-		<table class="table table-borderless"> 
+		<table class="table"> 
 			{% for item in object.cartitem_set.all %}
 				<br>
 				<tr id='item-{{ item.item.id }}'>
 				<td>
-					<img src="{{ item.item.get_image_url }}" style="width: 55%; height: 255px; border: 30px;">
-					<br>
+					<img src="{{ item.item.get_image_url }}" style="width: 85%; height: 255px; border: 30px;">
+				</td>
+				<td>
+					<h3>Description:</h3>
 					<label>{{ item.item.description }}</label>
 				</td>
-				<td id='item-line-total-{{ item.item.id }}' colspan='4' class='text-left'>
+				<td id='item-line-total-{{ item.item.id }}' colspan='4' class='text-right'>
 					<label>Item: {{ item.item.title }}</label><br>
 					<label>Price: ${{ item.item.price }}</label>
 					<form action="." method="GET" ><input type='hidden' name='item' value='{{ item.item.id }}' /><input type='number' class='item-qty' name='qty' value='{{ item.quantity }}' /><input type='hidden' name='fromcart' value='True' /><input type='submit' class='btn-update btn btn-link' value='Update item' style='display:none;'/>
 					</form>
 				</td>
 				<td class='text-right' >
-					<a href='{{ item.remove }}'>X</a>
+					<br>
+					<a href='{{ item.remove }}' class="btn btn-danger">Remove</a>
 				</td>
 				</tr>
 			{% endfor %}
 			<tr>
-				<td  colspan='4' class='text-right'>Subtotal: <span id='subtotal'>{{ object.subtotal }}</span></td>
+				<td  colspan='6' class='text-right'>Subtotal: <span id='subtotal'>{{ object.subtotal }}</span></td>
 			</tr>
 			<tr>
-				<td colspan='4' class='text-right'>Total: <span id='carttotal'>{{ object.total }}</span></td>
+				<td colspan='6' class='text-right'>Total: <span id='carttotal'>{{ object.total }}</span></td>
 			</tr>
 			<tr>
-				<td colspan='4' class='text-right'>
-					<a class='btn btn-warning' href="">Checkout </a>
+				<td colspan='6' class='text-right'>
+					<a class='btn btn-warning' href="{% url 'athmovil'%}?cart_id={{object.id}}">Checkout </a>
 					<a class='btn btn-default' href="/">Back </a>
 				</td>
 			</tr>
