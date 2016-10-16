@@ -35,7 +35,7 @@ class ATHMovilCheckoutView(TokenMixin, TemplateView):
 
 			if response.json()["responseStatus"] == "SUCCESS":
 				cart.is_complete()
-				request.session["cart_id"] = {}
+				request.session["cart_id"] = None
 				response = response.json()
 				payment, created = Payment.objects.get_or_create(cart=cart)
 				if created:

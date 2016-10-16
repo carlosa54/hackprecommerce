@@ -6,10 +6,16 @@ function showFlashMessage(message) {
 	"<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
 	"<span aria-hidden='true'>&times;</span></button>" 
 	+ message + "</div></div></div>"
-	$("body").append(template);
+	$("body").prepend(template);
 	$(".container-alert-flash").fadeIn();
 	setTimeout(function(){ 
 		$(".container-alert-flash").fadeOut();
-	}, 1800);
+
+	}, 1000);
+
+	setTimeout(function(){ 
+		$(".container-alert-flash").remove();
+
+	}, 1000);
 
 }
