@@ -56,3 +56,11 @@ class Cart(models.Model):
 		self.active = False
 		self.save()
 
+def do_total_receiver(sender, instance, *args, **kwargs):
+	subtotal = Decimal(instance.subtotal)
+	total = subtotal
+	instance.total = "%.2f" %(total)
+
+
+pre_save.connect(do_total_receiver, sender=Cart)
+
