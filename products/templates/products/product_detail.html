@@ -1,22 +1,8 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
 <script>
 {% block jquery %}
-
-function setPrice(){
-	var price = $(".variation_select option:selected").attr("data-price")
-	
-	var sale_price = $(".variation_select option:selected").attr("data-sale-price")
-	if (sale_price != "" && sale_price != "None" && sale_price != null) {
-		$("#price").html("<h3>" + sale_price + " <small class='og-price'>"+ price + "</small></h3>");
-	} else {
-		$("#price").text(price);
-	}
-}
-
-setPrice()
-$(".variation_select").change(function(){
-	setPrice();
-})
-
 
 $("#submit-btn").click(function(event){
 	event.preventDefault();
@@ -43,40 +29,40 @@ $("#submit-btn").click(function(event){
 </script>
 
 {% block content %}
-
-<div class="row">
-
-<div class= "col-sm-8">
-<h2>{{object.title}}</h2>
-
-
-{% if object.get_image_url%}
-<div>
-
-<img class= "img-responsive" src="{{object.get_image_url}}"/>
+<center><img src="{% static 'css/logo.png' %}" class="img-responsive" alt="Image"></center>
+<br><br>
+<div class="container" style="background-color: #2C3E50;">
+	<h3 style="color: white;">Product Details</h3>
 </div>
-{% endif %}
-
-
-<p class = "lead"> 
-{{ object.description }}
-</p> 
+	<div class="container" style="background-color: #EEEEEE">
+		<br>
+		<div class= "col-sm-7">
+	{% if object.get_image_url%}
+		<div class="polaroid" id="polaroid_details">
+			<img src="{{ object.get_image_url }}" style="width:100%; height: 350px;">
+			<div class="container"> 
+				<p>{{ object.description }}</p>
+			</div>
+		</div>
+	{% endif %}
+	<p class = "lead"></p> 
 </div>
 <!-- Product Sidebar -->
-<div class = "col-sm-4">
-<form id='add-form' method='GET' action="{% url 'cart' %}">
-<p class='lead' id='jquery-message'></p>
-	<input type='hidden' name='item' value='{{ object.id }}'/>
-	<h3 id='price'>
-			{{ object.price }}
-			<small class='og-price'>{{ object.price }}</small>
-	</h3>
-	<br/>
-	<input class='form-control' type='number' name='qty' value='1' min='1'/>
-<br/>
-<input id='submit-btn'type='submit' value="Add to Cart" class= 'btn btn-default' href=""/>
-</form>
+<div class="container col-sm-5">
+	<form id='add-form' method='GET' action="{% url 'cart' %}">
+		<p class='lead' id='jquery-message'></p>
+			<h2>{{object.title}}</h2>
+			<input type='hidden' name='item' value='{{ object.id }}'/>
+			<label>Price:</label>
+			<label id='price'>{{ object.price }}</label>
+			<br/>
+			<label>Quantity:</label>
+			<input class='form-control' type='number' name='qty' value='1' min='1'/>
+		<br/>
+		<input id='submit-btn'type='submit' value="Add to Cart" class= 'btn btn-success' href=""/>
+		<a href="/" class="btn btn-default">Back</a>
+	</form>
 </div>
-<!-- End Product Sidebar -->
 </div>
+
 {% endblock%}
