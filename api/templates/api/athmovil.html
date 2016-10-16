@@ -1,8 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{token}}
-<form>
-<input type="text" class="bfh-phone" data-format="ddd-ddd-dddd">
+{% if success %}
+<h1>Thank you, Your order has been proccessed successfully</h1>
+{% else %}
+<form action="{% url 'athmovil' %}" method="POST" role="form">{% csrf_token %}
+	<legend>Form title</legend>
+
+	<div class="form-group">
+		<label for="">label</label>
+		<input type="text" class="bfh-phone" name="phone" data-format="ddd-ddd-dddd" placeholder="Phone Number">
+		<input type="hidden"  name="cart_id" value="3">
+	</div>
+
+	
+
+	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
-{% endblock %}
+{% endif %}
+
+<!-- {{payment.referenceNumber }}
+{{payment.phone}}
+{{payment.amount}}
+{{payment.transStatus}}
+{{payment.responseStatus}}
+{% endblock %} -->
