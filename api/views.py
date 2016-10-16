@@ -15,7 +15,7 @@ class ATHMovilCheckoutView(TokenMixin, TemplateView):
 		template = self.template_name
 
 		context = {
-			"data": "dummy",
+			"cart_id": request.GET.get("cart_id"),
 		}
 		return render(request,template,context)
 
