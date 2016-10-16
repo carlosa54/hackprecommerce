@@ -1,13 +1,26 @@
+
 {% extends 'base.html' %}
 {% block navbar %}
 {% include 'navbar.html' %}
 {% endblock %}
 {% block content %}
-<div class="row">
-<h2>Payment History</h2>
+<style type="text/css">
+	body{
+		background-color: #2C3E50;
+	}
+</style>
+
+<div class="container" style="background-color: white;">
+<div style="background-color: ">
+	<center>
+		<h2>Payment History</h2>
+		<br>
+	</center>
+</div>
+	
 <table class="table table-bordered">
 	<thead>
-		<tr>
+		<tr style="background-color: #2C3E50; color: white;">
 			<th>Reference Number</th>
 			<th>Phone</th>
 			<th>Amount</th>

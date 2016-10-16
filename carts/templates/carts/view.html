@@ -60,7 +60,7 @@ $(".item-qty").change(function(){
 
 <style type="text/css">
 	body{
-		background-color: #EEEEEE;
+		background-color: #FFFFFF;
 	}
 	.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
     border: none;
@@ -75,7 +75,7 @@ $(".item-qty").change(function(){
 	<div class="container col-sm-12" style="background-color: #2C3E50; color: white;">
 			<h1>Your cart</h1>
 	</div>
-	<div class='container col-sm-12' style="background-color: white;">
+	<div class='container col-sm-12' style="background-color: #EEEEEE;">
 		<table class="table"> 
 			{% for item in object.cartitem_set.all %}
 				<br>
@@ -107,7 +107,7 @@ $(".item-qty").change(function(){
 			</tr>
 			<tr>
 				<td colspan='6' class='text-right'>
-					<a class='btn btn-warning' href="{% url 'athmovil'%}?cart_id={{object.id}}">Checkout </a>
+					<a class='btn btn-warning' href="{% url 'athmovil'%}?cart_id={{object.id}}">ATHMovil Checkout </a>
 					<a class='btn btn-default' href="/">Back </a>
 				</td>
 			</tr>
