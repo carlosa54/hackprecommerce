@@ -1,7 +1,3 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-
-{% block content %}
 {% if success %}
 <h1>Thank you, We sent a payment request to the phone number you provided.</h1>
 {% else %}
@@ -19,7 +15,7 @@
 			{% endif %}
 			<label for="">Enter your phone number</label><br>
 			<input type="text" class="bfh-phone" name="phone" data-format="ddd-ddd-dddd" placeholder="Phone Number">
-			<input type="hidden"  name="cart_id" value="{{ cart_id }}">
+			<input type="hidden"  name="cart_id" value="{{ object.id }}">
 		</div>
 		<button type="submit" class="btn btn-success" style="width: 20%;">Submit</button>
 	</form>
@@ -31,4 +27,4 @@
 {{payment.amount}}
 {{payment.transStatus}}
 {{payment.responseStatus}}
-{% endblock %} -->
+-->
