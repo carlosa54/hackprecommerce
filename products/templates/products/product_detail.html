@@ -29,10 +29,20 @@ $("#submit-btn").click(function(event){
 </script>
 
 {% block content %}
+<style type="text/css">
+	.fa:hover{
+		color: grey !important;
+	}
+</style>
 <center><img src="{% static 'css/logo.png' %}" class="img-responsive" alt="Image"></center>
 <br><br>
 <div class="container" style="background-color: #2C3E50;">
-	<h3 style="color: white;">Product Details</h3>
+	<div class="col-lg-6">
+		<label style="color: white; font-size: 28px;">Product Details</label>
+	</div>
+	<div class="col-lg-6" style="text-align: right;">
+		<a href="{% url 'cart' %}"><i class="fa fa-shopping-cart fa-3x" style="color: white;"><span id='cart-count-badge' class='badge'>{{request.session.cart_item_count }}</span></i></a>
+	</div>
 </div>
 	<div class="container" style="background-color: #EEEEEE">
 		<br>
