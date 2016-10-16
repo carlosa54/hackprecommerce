@@ -1,15 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Product
 
 # Create your views here.
 def home(request):
-	
-	context = {
-		"test" : "Testing home",
-	}
-	return render(request, "home.html", context)
+	return redirect('products')
 
 class ProductListView(ListView):
 	model = Product
