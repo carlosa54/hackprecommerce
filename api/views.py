@@ -17,6 +17,7 @@ class ATHMovilCheckoutView(TokenMixin, TemplateView):
 		context = {
 			"cart_id": request.GET.get("cart_id"),
 		}
+		print request.GET.get("cart_id")
 		return render(request,template,context)
 
 	def post(self, request, *args, **kwargs):
@@ -34,7 +35,7 @@ class ATHMovilCheckoutView(TokenMixin, TemplateView):
 
 			if response.json()["responseStatus"] == "SUCCESS":
 				cart.is_complete()
-				del request.session["cart_id"]
+				request.session["cart_id"] = {}
 				response = response.json()
 				payment, created = Payment.objects.get_or_create(cart=cart)
 				if created:
@@ -44,13 +45,25 @@ class ATHMovilCheckoutView(TokenMixin, TemplateView):
 					payment.save()
 
 				context = {
-					"success": True
+					"success": True,
+					"cart_id": cart_id
 				}
 				return render(request, template, context)
+			elif response.json()["responseStatus"] == "INVALID_PHONE_NUMBER":
+				context = {
+					"success": False,
+					"message": "The phone you entered is not valid, please confirm that you have an account with ATHMovil",
+					"cart_id": cart_id,
+				}
+			
 
-			context = {
-				"success": False
-			}
+				return render(request, template, context)
+
+		context = {
+			"success": False,
+			"cart_id": request.POST.get("cart_id")
+		}
+		print context
 		return render(request, template, context)
 
 class PaymentList(ListView):

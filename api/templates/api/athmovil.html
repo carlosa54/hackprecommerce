@@ -12,9 +12,14 @@
 	<form action="{% url 'athmovil' %}" method="POST" role="form">{% csrf_token %}
 		<legend>Authenticate with ATHMovil</legend>
 		<div class="form-group">
+			{% if message %}
+			<div class="alert alert-danger">
+  			{{message}}
+			</div>
+			{% endif %}
 			<label for="">Enter your phone number</label><br>
 			<input type="text" class="bfh-phone" name="phone" data-format="ddd-ddd-dddd" placeholder="Phone Number">
-			<input type="hidden"  name="cart_id" value="{{cart_id}}">
+			<input type="hidden"  name="cart_id" value="{{ cart_id }}">
 		</div>
 		<button type="submit" class="btn btn-success" style="width: 20%;">Submit</button>
 	</form>
