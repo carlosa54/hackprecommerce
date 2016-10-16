@@ -18,12 +18,14 @@ from django.contrib import admin
 from products.views import home
 from django.conf import settings
 from django.conf.urls.static import static
+from carts.views import CartView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^products/', include('products.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^$', home, name='home'),
+    url(r'^cart/$', CartView.as_view(), name='cart'),
 
 ]
 

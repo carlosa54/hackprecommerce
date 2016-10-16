@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.text import slugify
+from django.core.urlresolvers import reverse
 
 
 # Create your models here.
@@ -36,6 +37,8 @@ class Product(models.Model):
 			return img.image.url
 		else:
 			return img
+	def remove_from_cart(self):
+		return "%s?item=%s&qty=1&delete=True" %(reverse("cart"), self.id)
 
 def image_upload_to(instance, filename):
 	title = instance.product.title
