@@ -82,6 +82,8 @@ db.sqlite3
 .venv/
 venv/
 ENV/
+.DS_Store
+static_files_env/media_root/
 
 # Spyder project settings
 .spyderproject

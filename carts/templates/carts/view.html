@@ -108,7 +108,6 @@ $(".item-qty").change(function(){
 			</tr>
 			<tr>
 				<td colspan='6' class='text-right'>
-					<a class='btn btn-warning' onclick="toggle_visibility('athcheck');" href="#">ATHMovil Checkout </a>
 					<a class='btn btn-default' href="/">Back </a>
 					<br><br>
 					<i class="fa fa-cc-visa fa-3x" aria-hidden="true"></i>
@@ -120,19 +119,7 @@ $(".item-qty").change(function(){
 
 		</table>
 		<div class="messagealert" id="messagealert"></div>
-		<div id="athcheck" style="display:none">
-		{% include "api/athmovil.html" with object=object %}
-		</div>
 	</div>
 	{% endif %}
 </div>
-<script type="text/javascript">
-   function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-   }
-</script>
 {% endblock %}

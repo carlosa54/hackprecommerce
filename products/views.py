@@ -6,8 +6,6 @@ from django.views.generic import CreateView
 
 # Create your views here.
 def home(request):
-	if str(request.user.is_superuser) == "True":
-		return redirect('payments')
 	return redirect('products')
 
 class ProductListView(ListView):
