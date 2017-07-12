@@ -16,11 +16,19 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from products.views import home
+from django.conf import settings
+from django.conf.urls.static import static
+from carts.views import CartView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^products/', include('products.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^$', home, name='home'),
+    url(r'^cart/$', CartView.as_view(), name='cart'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

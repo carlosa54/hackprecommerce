@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<script>
+{% block jquery %}
+
+$(".item-qty").change(function(){
+	// $(this).next(".btn-update").fadeIn();
+	// event.preventDefault();
+	// .prev(h1)
+	var item = $(this).prev("input[type='hidden']").val();
+	var qty = $(this).val()
+	var fromcart = $(this).next().val();
+	var data = {
+		item: item,
+		qty: qty,
+		fromcart: fromcart
+	}
+	console.log(data);
+	$.ajax({
+		type: "GET", // "POST"
+		url: "{% url 'cart' %}",
+		data: data,
+		success: function(data) {
+			$("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted)
+			if (data.deleted){
+				$("#item-"+item).fadeOut();
+				$("#subtotal").text(data.subtotal);
+				$("#carttotal").text(data.cart_total);
+			} else {
+				$("#subtotal").text(data.subtotal);
+				$("#carttotal").text(data.cart_total);
+			}
+			if (data.total_items == 0 ) {
+				$(".table").fadeOut()
+				var template = "{% include 'carts/empty_cart.html' %}";
+				$(".main-content").html(template);
+			}
+			var message = ""
+			if (data.item_added) {
+				message = "New item added"
+			} else if (data.deleted){
+				message = "Item removed"
+			} else {
+				message = "Item updated"
+			}
+			showFlashMessage(message);
+			updateCartItemCount()
+			updateCartTotal()
+			}, 
+		error: function(response, error) {
+			$("#add-form").submit()
+		}
+	})
+});
+{% endblock %}
+</script>
+
+{% block content %}
+
+
+<style type="text/css">
+	body{
+		background-color: #FFFFFF;
+	}
+	.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
+    border: none;
+	}
+</style>
+<div class='row main-content'>
+	<center><img src="{% static 'css/logo.png' %}" class="img-responsive" alt="Image"></center>
+	<br><br>
+	{% if object.cartitem_set.count < 1 %}
+	{% include "carts/empty_cart.html" %}
+	{% else %}
+	<div class="container col-sm-12" style="background-color: #2C3E50; color: white;">
+			<h1>Your cart</h1>
+	</div>
+	<div class='container col-sm-12' style="background-color: #EEEEEE;">
+		<table class="table"> 
+			{% for item in object.cartitem_set.all %}
+				<br>
+				<tr id='item-{{ item.item.id }}'>
+				<td>
+					<img src="{{ item.item.get_image_url }}" style="width: 85%; height: 255px; border: 30px;">
+				</td>
+				<td>
+					<h3>Description:</h3>
+					<label>{{ item.item.description }}</label>
+				</td>
+				<td id='item-line-total-{{ item.item.id }}' colspan='4' class='text-right'>
+					<label>Item: {{ item.item.title }}</label><br>
+					<label>Price: ${{ item.item.price }}</label>
+					<form action="." method="GET" ><input type='hidden' name='item' value='{{ item.item.id }}' /><input type='number' class='item-qty' name='qty' value='{{ item.quantity }}' /><input type='hidden' name='fromcart' value='True' /><input type='submit' class='btn-update btn btn-link' value='Update item' style='display:none;'/>
+					</form>
+				</td>
+				<td class='text-right' >
+					<br>
+					<a href='{{ item.remove }}' class="btn btn-danger">Remove</a>
+				</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td  colspan='6' class='text-right'>Subtotal: <span id='subtotal'>{{ object.subtotal }}</span></td>
+			</tr>
+			<tr>
+				<td colspan='6' class='text-right'>Total: <span id='carttotal'>{{ object.total }}</span></td>
+			</tr>
+			<tr>
+				<td colspan='6' class='text-right'>
+					<a class='btn btn-warning' onclick="toggle_visibility('athcheck');" href="#">ATHMovil Checkout </a>
+					<a class='btn btn-default' href="/">Back </a>
+					<br><br>
+					<i class="fa fa-cc-visa fa-3x" aria-hidden="true"></i>
+					<i class="fa fa-cc-mastercard fa-3x" aria-hidden="true"></i>
+					<i class="fa fa-cc-amex fa-3x" aria-hidden="true"></i>
+					<i class="fa fa-cc-discover fa-3x" aria-hidden="true"></i>
+				</td>
+			</tr>
+
+		</table>
+		<div class="messagealert" id="messagealert"></div>
+		<div id="athcheck" style="display:none">
+		{% include "api/athmovil.html" with object=object %}
+		</div>
+	</div>
+	{% endif %}
+</div>
+<script type="text/javascript">
+   function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+   }
+</script>
+{% endblock %}

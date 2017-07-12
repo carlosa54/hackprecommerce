@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #my apps
     'api',
     'products',
+    'carts',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static_files_env", "static_root")
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_files_env", "media_root")
 STATICFILES_DIRS = (

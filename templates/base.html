@@ -23,7 +23,9 @@
 
   </head>
   <body>
-  {% include 'navbar.html' %}
+  {% block navbar %}
+  {% endblock %}
+    
   <div class= "container">
     
   {% if messages %}

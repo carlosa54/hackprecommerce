@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
+{% block content %}
+<style type="text/css">
+	body{
+		background-color: #2C3E50;
+	}
+</style>
+
+<div class="container" style="background-color: white;">
+<div style="background-color: ">
+	<center>
+		<h2>Payment History</h2>
+		<br>
+	</center>
+</div>
+	
+<table class="table table-bordered">
+	<thead>
+		<tr style="background-color: #2C3E50; color: white;">
+			<th>Reference Number</th>
+			<th>Phone</th>
+			<th>Amount</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for object in object_list %}
+		<tr>
+			<td>{{object.referenceNumber}}</td>
+			<td>{{object.phone}}</td>
+			<td>$ {{object.amount}}</td>
+			<td>{{object.status}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+	<div class="col-xs-4">
+	
+    </div>
+
+</div>
+{% endblock %}
