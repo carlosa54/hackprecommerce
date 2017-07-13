@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #my apps
+    'payments',
     'products',
     'carts',
 ]
@@ -128,3 +129,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static_files_env", "media_root")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static_files", "our_static"),
 )
+
+PAYPAL_MODE='sandbox'
+PAYPAL_CLIENT_ID= 'ASluobkrXG6eJFzWZrsOGYcGRsX4nCccaB4Cu-5LNQCoNCECtQWMVj651zC5450UPE5dESuUXEOk1xhT'
+PAYPAL_CLIENT_SECRET='ED5GGT1at1Sa72_ptLqM9FawEic_n58r6zHnQK_V1K1iKlPMiD8y1oFu7L0lmoV8rjF5lshOVOUg6ced'

@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^products/', include('products.urls')),
     url(r'^$', home, name='home'),
     url(r'^cart/$', CartView.as_view(), name='cart'),
-
+    url(r'payment/', include('payments.urls')),
 ]
 
 if settings.DEBUG:

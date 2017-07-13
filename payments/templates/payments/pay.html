@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content%}
+
+<div class="row">
+{% if not done %}
+<div class='col-sm-4'></div>
+<div class='col-sm-4 text-center'>
+<p class='lead'>Order {% if cart.id %}#{{ cart.id }}{% endif %} Summary</p>
+
+<table class='table'>
+<tr><td>{{ cart.cartitem_set.count }} Item(s): <br/>{% for i in cart.cartitem_set.all %}
+<b>{{ i.item.title }}</b> <b>quantity: {{ i.quantity }}</b><br/>
+{% endfor %}</td></tr>
+<tr><td>Cart Subtotal: {{ cart.subtotal }}</td></tr>
+<tr><td>Items Total: {{ cart.total }}</td></tr>
+
+<tr><td>Shipping: $5</td></tr>
+<tr><td>Order Total: {{ cart.total }}</td></tr>
+
+
+</table>
+<form id="myContainer" method="post" action="{% url 'payment' %}"> {% csrf_token %} 
+<input type='hidden' name="cart_id" value='{{ cart.id }}' />
+</form>
+</div>
+
+
+
+
+
+<div class="col-sm-4"></div>
+{% else %}
+<div class="col-sm-12 text-center">
+	<h1>Your Payment has been proccessed successfully.</h1>
+	<h2>Thank you for your order!</h2>
+	<a href="{% url 'home' %}">Go home</a>
+</div>
+
+{% endif %}
+
+
+</div>
+
+
+{% endblock %}
+{% block jquery %}
+window.paypalCheckoutReady = function() {
+    paypal.checkout.setup('ASluobkrXG6eJFzWZrsOGYcGRsX4nCccaB4Cu-5LNQCoNCECtQWMVj651zC5450UPE5dESuUXEOk1xhT', {
+        environment: 'sandbox',
+        container: 'myContainer'
+    });
+};  
+{% endblock %}
+
